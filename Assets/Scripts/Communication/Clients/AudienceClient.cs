@@ -34,7 +34,7 @@ public class AudienceClient : MonoBehaviour {
     }
     
     void Start() {
-        CameraAngle = this.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(1).gameObject;
+        CameraAngle = this.transform.GetChild(0).GetChild(0).gameObject;
 
         if(GameObject.FindWithTag("Player").name == "Ogre"){
             address = "/Ogre";
