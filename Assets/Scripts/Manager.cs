@@ -26,27 +26,37 @@ public class Manager : MonoBehaviour {
         }
         else if (!setuped){
             setupTime += Time.deltaTime;
-            timeText.text = "setup now... \n" + (setupEnd - setupTime).ToString();
+            timeText.text = "  準備中...    " + (setupEnd - setupTime).ToString("f2");
             // Debug.Log(setupTime);
         }
-        if (spawnPoint != Vector3.zero && !pointedFlag) {
-            CreateSpawnPointMarker(spawnPoint);
-            pointedFlag = true;
+        else {
+            GameStart();
         }
+
         if (startFlag) {
             time += Time.deltaTime;
-            timeText.text = "time : " + (end - time).ToString();
-            if (time >= end && !endFlag) {
-                Debug.Log("Time Up");
-                endFlag = true;
-                if(GameObject.FindWithTag("Player").name == "Villager"){
-                    resultText.text = "You Win!!!";
-                }
-                else{
-                    resultText.text = "You Lose...";
-                }
+            if (time > 60.0f) {
+                StartOgreMove();
             }
         }
+        // if (spawnPoint != Vector3.zero && !pointedFlag) {
+        //     // CreateSpawnPointMarker(spawnPoint);
+        //     // pointedFlag = true;
+        // }
+        // if (startFlag) {
+        //     time += Time.deltaTime;
+        //     timeText.text = "time : " + (end - time).ToString();
+        //     if (time >= end && !endFlag) {
+        //         Debug.Log("Time Up");
+        //         endFlag = true;
+        //         if(GameObject.FindWithTag("Player").name == "Villager"){
+        //             resultText.text = "You Win!!!";
+        //         }
+        //         else{
+        //             resultText.text = "You Lose...";
+        //         }
+        //     }
+        // }
     }
 
     public static void Prepared() {
@@ -77,5 +87,9 @@ public class Manager : MonoBehaviour {
         // GameObject obj = (GameObject)Resources.Load("Prefabs/SpawnPoint 1");
         GameObject obj = (GameObject)Resources.Load("Prefabs/SpawnPoint");
         Instantiate(obj, spawnPoint, Quaternion.identity);
+    }
+
+    void StartOgreMove() {
+        GameObject.FindWithTag("Enemy").GetComponent<AutoOgreMove>().enabled = true;
     }
 }
