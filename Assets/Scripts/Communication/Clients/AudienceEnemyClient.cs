@@ -56,8 +56,8 @@ public class AudienceEnemyClient : MonoBehaviour {
         statusList.Add(0.0f);
         statusList.Add(1.0f);
 
-        statusList.Add(50.0f);
-        statusList.Add(50.0f);
+        statusList.Add(0.0f);
+        statusList.Add(0.0f);
 
         OSCHandler.Instance.SendMessageToClient(HostList.clientID.audience, address, statusList);//Akaoniでいいのかな
     }

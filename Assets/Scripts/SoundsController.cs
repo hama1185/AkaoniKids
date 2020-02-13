@@ -10,6 +10,8 @@ public class SoundsController : MonoBehaviour {
     AudioReverbZone audioZone;
     GameObject player;
 
+    static public float vol = 0.0f;
+
     void Start() {
         player = GameObject.FindWithTag("Player");
         heartBeat = (AudioClip)Resources.Load("Sounds/HeartBeat");
@@ -23,18 +25,18 @@ public class SoundsController : MonoBehaviour {
 
     void Update() {
         float eachOtherDistance = Vector3.Distance(player.transform.position,EnemyPositionTracker.enemyPosition);
-       
+
         if (Manager.startFlag) {
-            heartBeatAudio.volume = 1.0f - 8 * (PlayerStatus.mind) / 1000.0f;//0.2から1.0
-            heartBeatAudio.pitch = 1.4f - (PlayerStatus.mind) / 160.0f;
+            heartBeatAudio.volume = 1.0f - 8 * (PlayerStatus.relaxed) / 1000.0f;//0.2から1.0
+            heartBeatAudio.pitch = 1.4f - (PlayerStatus.relaxed) / 160.0f;
         }
         else {
             heartBeatAudio.volume = 0.0f;
         }
-
+        
         
         // footStepAudio.volume = 0.5f + EnemyStatus.mind / 2.0f;
-        if(eachOtherDistance >=  50 - 7 * EnemyStatus.relaxed / 20){//25
+        if(eachOtherDistance >=  50 - 7 * EnemyStatus.relaxed / 20 || eachOtherDistance > 50.0f){//25
             footStepAudio.Stop();
         }
         else if (Manager.startFlag && !footStepAudio.isPlaying) {
