@@ -72,29 +72,7 @@ public class RealSenseServer : MonoBehaviour {
 
                     // CameraAdjusterにRealSenseから送られてきたrot.eulerAngles.yを割り当てる (float型)
                     // y軸中心の回転のずれだけを補正する (x,z軸についてもずれを補正するのはめんどそう)
-                    float eulerX = rot.eulerAngles.x;
-                    float eulerY = rot.eulerAngles.y;
-                    float eulerZ = rot.eulerAngles.z;
-
-                    eulerX = 360.0f - eulerX;
-                    if (eulerX > 180.0f) {
-                        eulerX -= 360.0f;
-                    }
-
-                    eulerY = 360.0f - eulerY;
-                    if (eulerY > 180.0f) {
-                        eulerY -= 360.0f;
-                    }
-
-                    eulerZ = 360.0f - eulerZ;
-                    if (eulerZ > 180.0f) {
-                        eulerZ -= 360.0f;
-                    }
-
-                    // Debug.Log(eulerY);
-                    cameraAdjuster.sentAngleX = eulerX;
-                    cameraAdjuster.sentAngleY = eulerY;
-                    cameraAdjuster.sentAngleZ = eulerZ;
+                    cameraAdjuster.sentAngle = rot;
                     cameraAdjuster.Adjust();
                 }
 			}
