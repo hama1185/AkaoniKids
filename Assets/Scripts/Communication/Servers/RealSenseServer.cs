@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityOSC;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ public class RealSenseServer : MonoBehaviour {
 	private Dictionary<string, ServerLog> servers;
     
     CameraAdjuster cameraAdjuster;
+
 
     void Awake() {
         IpGetter ipGetter = new IpGetter();
@@ -32,7 +34,7 @@ public class RealSenseServer : MonoBehaviour {
 
         OSCHandler.Instance.serverInit(serverName,inComingPort); //init OSC　//----------変更
         servers = new Dictionary<string, ServerLog>();
-        cameraAdjuster = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).GetComponent<CameraAdjuster>();
+        cameraAdjuster = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetComponent<CameraAdjuster>();
     }
 
     // Update is called once per frame
